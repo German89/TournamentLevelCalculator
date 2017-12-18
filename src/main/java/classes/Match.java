@@ -47,4 +47,6 @@ public class Match {
     public void setTournamentLevelPlayerB(int tournamentLevelPlayerB) {
         this.tournamentLevelPlayerB = tournamentLevelPlayerB;
     }
+
+
 }

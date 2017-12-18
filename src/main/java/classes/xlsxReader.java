@@ -2,13 +2,9 @@ package classes;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -49,7 +45,19 @@ public class xlsxReader {
             }
 
             return listOfPlayers;
- }
+        }
+       /*
+        public List<Match> matchReader(XSSFWorkbook workbook){
+            //This method is going to load the list of all the matches played on the tournament
+            Sheet datatypeSheet = workbook.getSheetAt(0);
+            Iterator<Row> iterator = datatypeSheet.iterator();
+
+            List<Match> listOfMatches = new ArrayList<Match>();
+
+        }*/
+
+
+
 
 
 }
