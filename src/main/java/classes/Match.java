@@ -2,26 +2,24 @@ package classes;
 
 public class Match {
 
-    private String playerAName;
-    private String playerBName;
+    private String player;
+    private String opponent;
     private String winningPlayer;
-    private int tournamentLevelPlayerA;
-    private int tournamentLevelPlayerB;
 
-    public String getPlayerAName() {
-        return playerAName;
+    public String getPlayer() {
+        return player;
     }
 
-    public void setPlayerAName(String playerAName) {
-        this.playerAName = playerAName;
+    public void setPlayer(String player) {
+        this.player = player;
     }
 
-    public String getPlayerBName() {
-        return playerBName;
+    public String getOpponent() {
+        return opponent;
     }
 
-    public void setPlayerBName(String playerBName) {
-        this.playerBName = playerBName;
+    public void setOpponent(String opponent) {
+        this.opponent = opponent;
     }
 
     public String getWinningPlayer() {
@@ -31,22 +29,4 @@ public class Match {
     public void setWinningPlayer(String winningPlayer) {
         this.winningPlayer = winningPlayer;
     }
-
-    public int getTournamentLevelPlayerA() {
-        return tournamentLevelPlayerA;
-    }
-
-    public void setTournamentLevelPlayerA(int tournamentLevelPlayerA) {
-        this.tournamentLevelPlayerA = tournamentLevelPlayerA;
-    }
-
-    public int getTournamentLevelPlayerB() {
-        return tournamentLevelPlayerB;
-    }
-
-    public void setTournamentLevelPlayerB(int tournamentLevelPlayerB) {
-        this.tournamentLevelPlayerB = tournamentLevelPlayerB;
-    }
-
-
 }

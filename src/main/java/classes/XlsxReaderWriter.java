@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class xlsxReader {
+public class XlsxReaderWriter {
 
     private static final String FILE_NAME = "tournamentFiles/Tournament.xlsx";
 
@@ -46,17 +46,35 @@ public class xlsxReader {
 
             return listOfPlayers;
         }
-       /*
-        public List<Match> matchReader(XSSFWorkbook workbook){
+
+        public List<Match> getListOfMatches(XSSFWorkbook workbook){
             //This method is going to load the list of all the matches played on the tournament
-            Sheet datatypeSheet = workbook.getSheetAt(0);
+            Sheet datatypeSheet = workbook.getSheetAt(1);
             Iterator<Row> iterator = datatypeSheet.iterator();
 
             List<Match> listOfMatches = new ArrayList<Match>();
 
-        }*/
+            while (iterator.hasNext()) {
+                Match match = new Match();
+                Row currentRow = iterator.next();
 
+                // get the player name
+                Cell currentCell = currentRow.getCell(0);
+                match.setPlayer(currentCell.getStringCellValue());
 
+                //get the opponent Name
+                currentCell = currentRow.getCell(1);
+                match.setOpponent(currentCell.getStringCellValue());
+
+                //get the winning Player
+                currentCell = currentRow.getCell(2);
+                match.setWinningPlayer(currentCell.getStringCellValue());
+
+                listOfMatches.add(match);
+            }
+
+            return listOfMatches;
+        }
 
 
 
