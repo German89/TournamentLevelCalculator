@@ -9,8 +9,8 @@ import java.util.List;
 public class Main {
 
     public static void main(String [] args) throws IOException {
-        Player player = new Player();
         Match match = new Match();
+        Formula formula = new Formula();
         XlsxReaderWriter xlsxReaderWriter = new XlsxReaderWriter();
 
 
@@ -19,16 +19,28 @@ public class Main {
         List<Match> listOfMatches = xlsxReaderWriter.getListOfMatches(xssfWorkbook); //get the list of matches
 
 
-        for(Player player1 : listOfPlayers){
+        for(Player player : listOfPlayers){
             // Find all the matches of that player in the tournament
-            List<Match> listOfPlayerMatches = new ArrayList<Match>();
+            //Get the total of points earned/lost by the player after all the matches has been processed
+            int totalLevelEarnedLost = 0;
             for(Match match1 : listOfMatches){
-                if (match1.getPlayer().equals(player1.getName())){
-                    listOfPlayerMatches.add(match1);
+                if (match1.getPlayer().equals(player.getName())){
+                    //Get the opponent
+                    Player opponent = new Player();
+                    for (Player player2 : listOfPlayers){
+                        if(match1.getPlayer().equals(player2.getName())){
+                            opponent = player2;
+                            break;
+                        }
+                    }
+
+                    totalLevelEarnedLost = formula.getTorunamentLevelAfterMach(player, opponent, match1.getWinningPlayer());
+                    Integer totalOfPoints = player.getTournamentLevelBeforeTournament() + totalLevelEarnedLost;
+                    xlsxReaderWriter.writeTorunamentPointsEarnedLost(xssfWorkbook, player.getName(), totalOfPoints);
                 }
             }
 
-            //Get the total of points earned by the
+
 
 
 

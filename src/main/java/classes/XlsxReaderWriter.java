@@ -2,6 +2,7 @@ package classes;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.File;
 import java.io.FileInputStream;
@@ -77,5 +78,20 @@ public class XlsxReaderWriter {
         }
 
 
+        public void writeTorunamentPointsEarnedLost(XSSFWorkbook workbook ,  String playerName, Integer tournamentPointsEarnedLost){
+            Sheet dataTypeSheet = workbook.getSheetAt(0);
+            Iterator<Row> iterator = dataTypeSheet.iterator();
+
+            while (iterator.hasNext()) {
+                Row currentRow = iterator.next();
+                Cell currentCell = currentRow.getCell(0);
+
+                if(playerName.equals(currentCell.getStringCellValue())){
+                    currentCell = currentRow.getCell(2);
+                    currentCell.setCellValue(tournamentPointsEarnedLost.toString());
+                    break;
+                }
+            }
+        }
 
 }
