@@ -15,10 +15,10 @@ public class Formula {
 
         }else {
             //If the player lost the match it will lost points depending on the formula applied
-            if(player.getTournamentLevelBeforeTournament() - opponent.getTournamentLevelBeforeTournament() > 0){
-                tournamentlevelEarnedLost = getPointsWinningPlayerHasMoreLevel(player.getTournamentLevelBeforeTournament() - opponent.getTournamentLevelBeforeTournament());
+            if(opponent.getTournamentLevelBeforeTournament() - player.getTournamentLevelBeforeTournament() > 0){
+                tournamentlevelEarnedLost = getPointsWinningPlayerHasMoreLevel(opponent.getTournamentLevelBeforeTournament() - player.getTournamentLevelBeforeTournament() );
             }else {
-                tournamentlevelEarnedLost = getPointsWinningPlayerHasLessLevel(Math.abs(player.getTournamentLevelBeforeTournament() - opponent.getTournamentLevelBeforeTournament()));
+                tournamentlevelEarnedLost = getPointsWinningPlayerHasLessLevel(Math.abs(opponent.getTournamentLevelBeforeTournament() - player.getTournamentLevelBeforeTournament() ));
             }
             tournamentlevelEarnedLost = - tournamentlevelEarnedLost;
         }
