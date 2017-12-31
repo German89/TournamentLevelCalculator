@@ -3,8 +3,8 @@ package classes;
 public class Player {
 
     private String name;
-    private int tournamentLevelBeforeTournament;
-    private int tournamentLevelAfterTournament;
+    private double tournamentLevelBeforeTournament;
+    private double tournamentLevelAfterTournament;
 
     public String getName() {
         return name;
@@ -14,19 +14,19 @@ public class Player {
         this.name = name;
     }
 
-    public int getTournamentLevelBeforeTournament() {
+    public double getTournamentLevelBeforeTournament() {
         return tournamentLevelBeforeTournament;
     }
 
-    public void setTournamentLevelBeforeTournament(int tournamentLevelBeforeTournament) {
+    public void setTournamentLevelBeforeTournament(double tournamentLevelBeforeTournament) {
         this.tournamentLevelBeforeTournament = tournamentLevelBeforeTournament;
     }
 
-    public int getTournamentLevelAfterTournament() {
+    public double getTournamentLevelAfterTournament() {
         return tournamentLevelAfterTournament;
     }
 
-    public void setTournamentLevelAfterTournament(int tournamentLevelAfterTournament) {
+    public void setTournamentLevelAfterTournament(double tournamentLevelAfterTournament) {
         this.tournamentLevelAfterTournament = tournamentLevelAfterTournament;
     }
 }

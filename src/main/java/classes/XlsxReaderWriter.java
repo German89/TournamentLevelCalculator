@@ -13,11 +13,12 @@ import java.util.List;
 
 public class XlsxReaderWriter {
 
-    private static final String FILE_NAME = "tournamentFiles/Tournament.xlsx";
+    private static final String FILE_NAME = "/src/main/java/tournamentFiles/Tournament.xlsx";
 
 
     public XSSFWorkbook readFile() throws IOException {
-        FileInputStream excelFile = new FileInputStream(new File(FILE_NAME));
+        String workingDir = System.getProperty("user.dir");
+        FileInputStream excelFile = new FileInputStream(new File(workingDir + FILE_NAME));
         XSSFWorkbook workbook = new XSSFWorkbook(excelFile);
         return workbook;
     }
@@ -30,9 +31,14 @@ public class XlsxReaderWriter {
 
         List<Player> listOfPlayers = new ArrayList<Player>();
 
+        iterator.next();//skip the title line
+
         while (iterator.hasNext()) {
             Player player = new Player();
             Row currentRow = iterator.next();
+            if(currentRow.getCell(0).toString().isEmpty()){
+                break;
+            }
 
             // get the player name
             Cell currentCell = currentRow.getCell(0);
@@ -40,7 +46,7 @@ public class XlsxReaderWriter {
 
             //get the player tournament level before tournament
             currentCell = currentRow.getCell(1);
-            player.setTournamentLevelBeforeTournament(Integer.parseInt(currentCell.getStringCellValue()));
+            player.setTournamentLevelBeforeTournament(currentCell.getNumericCellValue());
 
             listOfPlayers.add(player);
             }
@@ -54,10 +60,15 @@ public class XlsxReaderWriter {
             Iterator<Row> iterator = datatypeSheet.iterator();
 
             List<Match> listOfMatches = new ArrayList<Match>();
+            iterator.next();//skip the title line
 
             while (iterator.hasNext()) {
                 Match match = new Match();
                 Row currentRow = iterator.next();
+
+                if(currentRow.getCell(0).toString().isEmpty()){
+                    break;
+                }
 
                 // get the player name
                 Cell currentCell = currentRow.getCell(0);
@@ -78,7 +89,8 @@ public class XlsxReaderWriter {
         }
 
 
-        public void writeTorunamentPointsEarnedLost(XSSFWorkbook workbook ,  String playerName, Integer tournamentPointsEarnedLost){
+        public void writeTorunamentPointsEarnedLost(XSSFWorkbook workbook ,  String playerName, double tournamentPointsEarnedLost){
+            //Search for the player name in the first sheet of the xlsx and write the tournament level of the player
             Sheet dataTypeSheet = workbook.getSheetAt(0);
             Iterator<Row> iterator = dataTypeSheet.iterator();
 
@@ -88,7 +100,7 @@ public class XlsxReaderWriter {
 
                 if(playerName.equals(currentCell.getStringCellValue())){
                     currentCell = currentRow.getCell(2);
-                    currentCell.setCellValue(tournamentPointsEarnedLost.toString());
+                    currentCell.setCellValue(tournamentPointsEarnedLost);
                     break;
                 }
             }

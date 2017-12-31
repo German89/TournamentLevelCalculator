@@ -2,15 +2,15 @@ package classes;
 
 public class Formula {
 
-   Integer getTorunamentLevelAfterMach(Player player, Player opponent, String winningPlayer){
-        int tournamentlevelEarnedLost = 0;
+   double getTorunamentLevelAfterMatch(Player player, Player opponent, String winningPlayer){
+        double tournamentlevelEarnedLost = 0;
 
         if(winningPlayer.equals(player.getName())){
             //If the Player won the match it will earn points depending on the formula applied
             if(player.getTournamentLevelBeforeTournament() - opponent.getTournamentLevelBeforeTournament() > 0){
                 tournamentlevelEarnedLost = getPointsWinningPlayerHasMoreLevel(player.getTournamentLevelBeforeTournament() - opponent.getTournamentLevelBeforeTournament());
             }else {
-                tournamentlevelEarnedLost = getPointsWinningPlayerHasLessLevel(player.getTournamentLevelBeforeTournament() - opponent.getTournamentLevelBeforeTournament());
+                tournamentlevelEarnedLost = getPointsWinningPlayerHasLessLevel(Math.abs(player.getTournamentLevelBeforeTournament() - opponent.getTournamentLevelBeforeTournament()));
             }
 
         }else {
@@ -18,7 +18,7 @@ public class Formula {
             if(player.getTournamentLevelBeforeTournament() - opponent.getTournamentLevelBeforeTournament() > 0){
                 tournamentlevelEarnedLost = getPointsWinningPlayerHasMoreLevel(player.getTournamentLevelBeforeTournament() - opponent.getTournamentLevelBeforeTournament());
             }else {
-                tournamentlevelEarnedLost = getPointsWinningPlayerHasLessLevel(player.getTournamentLevelBeforeTournament() - opponent.getTournamentLevelBeforeTournament());
+                tournamentlevelEarnedLost = getPointsWinningPlayerHasLessLevel(Math.abs(player.getTournamentLevelBeforeTournament() - opponent.getTournamentLevelBeforeTournament()));
             }
             tournamentlevelEarnedLost = - tournamentlevelEarnedLost;
         }
@@ -27,7 +27,7 @@ public class Formula {
 
     }
 
-    public int getPointsWinningPlayerHasMoreLevel(int differencePlayerLevel){
+    public double getPointsWinningPlayerHasMoreLevel(double differencePlayerLevel){
        //Formula to apply if the winning player has more level than the looser
        if(differencePlayerLevel < 25){
            return 18;
@@ -53,7 +53,7 @@ public class Formula {
     }
 
 
-    public int getPointsWinningPlayerHasLessLevel(int differencePlayerLevel){
+    public double getPointsWinningPlayerHasLessLevel(double differencePlayerLevel){
         //Formula to apply if the winning player has less level than the looser
         if(differencePlayerLevel < 25){
             return 18;
