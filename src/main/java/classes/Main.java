@@ -45,7 +45,7 @@ public class Main {
             }
             //Write the total of points in the xlsx
             double totalOfPoints = player.getTournamentLevelBeforeTournament() + totalLevelEarnedLost;
-            xlsxReaderWriter.writeTorunamentPointsEarnedLost(xssfWorkbook, player.getName(), totalOfPoints);
+            xlsxReaderWriter.writeTorunamentPointsEarnedLost(player.getName(), totalOfPoints);
         }
     }
 }

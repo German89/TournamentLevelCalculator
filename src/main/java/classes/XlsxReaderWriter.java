@@ -4,9 +4,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -14,10 +13,9 @@ import java.util.List;
 public class XlsxReaderWriter {
 
     private static final String FILE_NAME = "/src/main/java/tournamentFiles/Tournament.xlsx";
-
+    String workingDir = System.getProperty("user.dir");
 
     public XSSFWorkbook readFile() throws IOException {
-        String workingDir = System.getProperty("user.dir");
         FileInputStream excelFile = new FileInputStream(new File(workingDir + FILE_NAME));
         XSSFWorkbook workbook = new XSSFWorkbook(excelFile);
         return workbook;
@@ -89,8 +87,10 @@ public class XlsxReaderWriter {
         }
 
 
-        public void writeTorunamentPointsEarnedLost(XSSFWorkbook workbook ,  String playerName, double tournamentPointsEarnedLost){
+        public void writeTorunamentPointsEarnedLost(String playerName, double tournamentPointsEarnedLost) throws IOException {
             //Search for the player name in the first sheet of the xlsx and write the tournament level of the player
+            FileInputStream excelFile = new FileInputStream(new File(workingDir + FILE_NAME));
+            XSSFWorkbook workbook = new XSSFWorkbook(excelFile);
             Sheet dataTypeSheet = workbook.getSheetAt(0);
             Iterator<Row> iterator = dataTypeSheet.iterator();
 
@@ -101,9 +101,12 @@ public class XlsxReaderWriter {
                 if(playerName.equals(currentCell.getStringCellValue())){
                     currentCell = currentRow.getCell(2);
                     currentCell.setCellValue(tournamentPointsEarnedLost);
+                    excelFile.close();
+                    FileOutputStream output_file = new FileOutputStream(new File(workingDir + FILE_NAME));
+                    workbook.write(output_file);
+                    output_file.close();
                     break;
                 }
             }
         }
-
 }
