@@ -1,8 +1,5 @@
 package classes;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;
@@ -44,7 +41,8 @@ public class XlsxReaderWriter {
 
             //get the player tournament level before tournament
             currentCell = currentRow.getCell(1);
-            player.setTournamentLevelBeforeTournament(currentCell.getNumericCellValue());
+            currentCell.setCellType(CellType.STRING);
+            player.setTournamentLevelBeforeTournament(Double.parseDouble(currentCell.getStringCellValue()));
 
             listOfPlayers.add(player);
             }
@@ -84,6 +82,37 @@ public class XlsxReaderWriter {
             }
 
             return listOfMatches;
+        }
+
+        public void writePointsOfMatch(Match match, double tournamentPointsEarnedLost) throws IOException {
+            FileInputStream excelFile = new FileInputStream(new File(workingDir + FILE_NAME));
+            XSSFWorkbook workbook = new XSSFWorkbook(excelFile);
+            Sheet datatypeSheet = workbook.getSheetAt(1);
+            Iterator<Row> iterator = datatypeSheet.iterator();
+            iterator.next();//skip the title line
+
+            while (iterator.hasNext()) {
+                Row currentRow = iterator.next();
+
+                if(currentRow.getCell(0).toString().isEmpty()){
+                    break;
+                }
+                Cell currentCell = currentRow.getCell(0);
+                String player = currentCell.getStringCellValue();
+
+                currentCell = currentRow.getCell(1);
+                String opponent = currentCell.getStringCellValue();
+
+                if(player.equals(match.getPlayer())  && opponent.equals(match.getOpponent())){
+                    currentCell = currentRow.getCell(3);
+                    currentCell.setCellValue(tournamentPointsEarnedLost);
+                    excelFile.close();
+                    FileOutputStream output_file = new FileOutputStream(new File(workingDir + FILE_NAME));
+                    workbook.write(output_file);
+                    output_file.close();
+                    break;
+                }
+            }
         }
 
 

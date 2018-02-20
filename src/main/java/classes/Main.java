@@ -40,7 +40,9 @@ public class Main {
                     }
 
                     //Get the total of points earned / lost by the player after the match applying the formula
-                    totalLevelEarnedLost = totalLevelEarnedLost + formula.getTorunamentLevelAfterMatch(player, opponent, match1.getWinningPlayer());
+                    double pointsWonLostOnMatch  = formula.getTorunamentLevelAfterMatch(player, opponent, match1.getWinningPlayer());
+                    totalLevelEarnedLost = totalLevelEarnedLost + pointsWonLostOnMatch;
+                    xlsxReaderWriter.writePointsOfMatch(match1, pointsWonLostOnMatch);
                 }
             }
             //Write the total of points in the xlsx
